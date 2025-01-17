@@ -1,71 +1,62 @@
-# hora-giticons README
+# GitIcons Commit Helper
 
-This is the README for your extension "hora-giticons". After writing up a brief description, we recommend including the following sections.
+A **GitIcons Commit Helper** é uma extensão do Visual Studio Code que facilita a criação de mensagens de commit seguindo a convenção de "Commit Semântico". Com essa extensão, você pode adicionar ícones representativos aos seus commits, selecionar um escopo, fornecer uma descrição detalhada e até mesmo referenciar issues diretamente na sua mensagem de commit.
 
-## Features
+## Funcionalidades
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+- **Seleção de Ícones**: Escolha entre ícones para diferentes tipos de commit, como:
+  - ✨ Nova Funcionalidade
+  - 🐛 Correção de Bug
+  - 📝 Documentação
+  - 🚀 Desempenho
+- **Escopo do Commit**: Adicione um escopo para especificar a área afetada pelo commit (exemplo: `auth`, `ui`).
+- **Corpo do Commit**: Insira uma descrição detalhada sobre as mudanças realizadas.
 
-For example if there is an image subfolder under your extension project workspace:
+- **Rodapé do Commit**: Especifique informações adicionais como "BREAKING CHANGE" ou outras observações.
 
-\!\[feature X\]\(images/feature-x.png\)
+- **Referência a Issues**: Adicione uma referência à issue relacionada ao commit (exemplo: `#123`).
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+- **Pré-visualização do Commit**: Visualize como sua mensagem de commit ficará antes de enviá-la.
 
-## Requirements
+- **Execução de Commit**: Com um clique, sua mensagem de commit é gerada e pronta para ser usada.
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+## Instalação
 
-## Extension Settings
+1. Abra o Visual Studio Code.
+2. Acesse a seção de **Extensões** (ícone de quadrado no painel lateral).
+3. Procure por **GitIcons Commit Helper** e clique em **Instalar**.
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+## Como Usar
 
-For example:
+1. Após a instalação, abra o **Command Palette** (Ctrl+Shift+P ou Cmd+Shift+P no macOS).
+2. Digite **GitIcons Commit** e selecione a opção **GitIcons Commit**.
+3. Uma janela será aberta onde você pode:
+   - Escolher o ícone do commit.
+   - Inserir o escopo.
+   - Escrever a descrição do commit.
+   - Inserir o rodapé (opcional).
+   - Referenciar uma issue (opcional).
+4. Clique em **Pré-visualizar** para ver como sua mensagem de commit ficará.
+5. Clique em **Fazer Commit** para enviar sua mensagem de commit para o console.
 
-This extension contributes the following settings:
+## Exemplo de Commit Gerado
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+Abaixo está um exemplo de como uma mensagem de commit gerada pela extensão pode se parecer:
 
-## Known Issues
+`
+✨ (auth): Adiciona nova funcionalidade de login
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+Adiciona a autenticação com Google.
 
-## Release Notes
+BREAKING CHANGE: A API de autenticação foi modificada.
 
-Users appreciate release notes as you update your extension.
+Refs: #123
+`
 
-### 1.0.0
+## Contribuição
 
-Initial release of ...
+Se você deseja contribuir para esta extensão, fique à vontade para abrir um pull request ou reportar problemas através da aba **Issues**.
 
-### 1.0.1
+## Licença
 
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+Esta extensão é licenciada sob a licença [MIT](LICENSE).

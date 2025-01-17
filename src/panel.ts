@@ -49,28 +49,47 @@ function getWebviewContent(
     <body>
         <h1>GitIcons: Commit Helper</h1>
         <div class="container">
-            <label for="icon">Escolha um ícone:</label>
-            <select id="icon">
-                <option value="✨">✨ Nova Funcionalidade</option>
-                <option value="🐛">🐛 Correção de Bug</option>
-                <option value="📝">📝 Documentação</option>
-                <option value="🚀">🚀 Desempenho</option>
-            </select>
+            <div id="step1" class="step">
+                <label for="type">Tipo de Commit:</label>
+                <select id="type">
+                    <option value="feat">✨ feat: Nova funcionalidade</option>
+                    <option value="fix">🐛 fix: Correção de bug</option>
+                    <option value="docs">📝 docs: Documentação</option>
+                    <option value="test">⚙️ test: Testes</option>
+                    <option value="build">🏗️ build: Build</option>
+                    <option value="perf">🚀 perf: Desempenho</option>
+                    <option value="style">🎨 style: Estilo do código</option>
+                    <option value="refactor">🔨 refactor: Refatoração</option>
+                    <option value="chore">🔧 chore: Tarefas</option>
+                    <option value="ci">🤖 ci: Integração contínua</option>
+                    <option value="raw">📄 raw: Arquivos e dados</option>
+                    <option value="cleanup">🧹 cleanup: Limpeza de código</option>
+                    <option value="remove">❌ remove: Remoção</option>
+                </select>
+                <button id="next1">Próximo</button>
+            </div>
 
-            <label for="scope">Escopo:</label>
-            <input id="scope" type="text" placeholder="Ex.: auth, ui">
+            <div id="step2" class="step hidden">
+                <label for="scope">Escopo:</label>
+                <input id="scope" type="text" placeholder="Ex.: auth, ui">
+                <button id="next2">Próximo</button>
+            </div>
 
-            <label for="body">Corpo do Commit:</label>
-            <textarea id="body" rows="4" placeholder="Descrição detalhada"></textarea>
+            <div id="step3" class="step hidden">
+                <label for="body">Corpo do Commit:</label>
+                <textarea id="body" rows="4" placeholder="Descrição detalhada"></textarea>
+                <button id="next3">Próximo</button>
+            </div>
 
-            <label for="footer">Rodapé:</label>
-            <textarea id="footer" rows="2" placeholder="Ex.: BREAKING CHANGE: ..."></textarea>
+            <div id="step4" class="step hidden">
+                <label for="footer">Rodapé:</label>
+                <textarea id="footer" rows="2" placeholder="Ex.: BREAKING CHANGE: ..."></textarea>
 
-            <label for="issue">Referência à Issue:</label>
-            <input id="issue" type="text" placeholder="Ex.: #123">
+                <label for="issue">Referência à Issue:</label>
+                <input id="issue" type="text" placeholder="Ex.: #123">
 
-            <button id="preview">Pré-visualizar</button>
-            <button id="commit">Fazer Commit</button>
+                <button id="commit">Fazer Commit</button>
+            </div>
 
             <div id="commitResult"></div>
         </div>
@@ -78,32 +97,48 @@ function getWebviewContent(
         <script>
             const vscode = acquireVsCodeApi();
 
-            // Evento do botão de Commit
+            let commitMessage = {
+                type: '',
+                scope: '',
+                body: '',
+                footer: '',
+                issue: ''
+            };
+
+            function showStep(step) {
+                const steps = document.querySelectorAll('.step');
+                steps.forEach(s => s.classList.add('hidden'));
+                document.getElementById('step' + step).classList.remove('hidden');
+            }
+
+            document.getElementById('next1').addEventListener('click', () => {
+                commitMessage.type = document.getElementById('type').value;
+                showStep(2);
+            });
+
+            document.getElementById('next2').addEventListener('click', () => {
+                commitMessage.scope = document.getElementById('scope').value;
+                showStep(3);
+            });
+
+            document.getElementById('next3').addEventListener('click', () => {
+                commitMessage.body = document.getElementById('body').value;
+                showStep(4);
+            });
+
             document.getElementById('commit').addEventListener('click', () => {
-                const icon = document.getElementById('icon').value;
-                const scope = document.getElementById('scope').value;
-                const body = document.getElementById('body').value;
-                const footer = document.getElementById('footer').value;
-                const issue = document.getElementById('issue').value;
+                commitMessage.footer = document.getElementById('footer').value;
+                commitMessage.issue = document.getElementById('issue').value;
 
-                const commitMessage = \`\${icon} (\${scope}): \${body}\\n\\n\${footer}\\n\\nRefs: \${issue}\`;
+                const finalMessage = \`\${commitMessage.type} (\${commitMessage.scope}): \${commitMessage.body}\\n\\n\${commitMessage.footer}\\n\\nRefs: \${commitMessage.issue}\`;
 
-                // Enviar a mensagem para o backend (extension.ts)
-                vscode.postMessage({ command: 'commit', message: commitMessage });
+                vscode.postMessage({ command: 'commit', message: finalMessage });
+                document.getElementById('commitResult').textContent = 'Commit realizado com sucesso!';
             });
 
-            document.getElementById('preview').addEventListener('click', () => {
-                const icon = document.getElementById('icon').value;
-                const scope = document.getElementById('scope').value;
-                const body = document.getElementById('body').value;
-                const footer = document.getElementById('footer').value;
-                const issue = document.getElementById('issue').value;
-
-                const previewMessage = \`\${icon} (\${scope}): \${body}\\n\\n\${footer}\\n\\nRefs: \${issue}\`;
-
-                document.getElementById('commitResult').textContent = previewMessage;
-            });
+            showStep(1);
         </script>
     </body>
-    </html>`;
+    </html>
+  `;
 }

@@ -2,13 +2,24 @@
   "name": "hora-giticons",
   "displayName": "GitIcons",
   "description": "Facilite e estilize seus commits no Git adicionando ícones semânticos diretamente no VS Code. Deixe seu histórico de commits mais claro e profissional!",
-  "version": "0.0.1",
+  "version": "1.0.2",
   "engines": {
     "vscode": "^1.96.0"
   },
   "categories": [
     "Other"
   ],
+  "homepage": "https://github.com/Matheus-hora48/hora-giticons",
+  "icon": "media/icon.png",
+  "bugs": {
+    "url": "https://github.com/Matheus-hora48/hora-giticons/issues"
+  },
+  "publisher": "GitIcons",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Matheus-hora48/hora-giticons.git"
+  },
+  "license": "MIT",
   "activationEvents": [],
   "main": "./dist/extension.js",
   "contributes": {
