@@ -1,4 +1,5 @@
 import * as vscode from "vscode";
+import { API, Repository } from "./types/git";
 
 export function activate(context: vscode.ExtensionContext) {
   const disposable = vscode.commands.registerCommand(
@@ -109,19 +110,21 @@ export function activate(context: vscode.ExtensionContext) {
             finalCommitMessage += `\n\n${footer}`;
           }
 
-          const sourceControl = vscode.scm.createSourceControl(
-            "git",
-            "Git Source Control"
-          );
+          let gitExtension =
+            vscode.extensions.getExtension("vscode.git")?.exports;
 
-          if (sourceControl && sourceControl.inputBox) {
-            sourceControl.inputBox.value = finalCommitMessage;
+          let api: API = gitExtension.getAPI(1);
+          let repo: Repository = api.repositories[0];
+
+          if (repo) {
+            repo.inputBox.value = finalCommitMessage;
+
             vscode.window.showInformationMessage(
-              "Mensagem de commit inserida com sucesso!"
+              `Mensagem de commit definida: ${finalCommitMessage}`
             );
           } else {
             vscode.window.showErrorMessage(
-              "Não foi possível acessar o Source Control."
+              "Nenhum repositório Git foi encontrado. Por favor, abra um repositório Git."
             );
           }
         }
