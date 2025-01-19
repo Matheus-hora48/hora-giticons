@@ -2,7 +2,7 @@
   "name": "hora-giticons",
   "displayName": "GitIcons",
   "description": "Facilite e estilize seus commits no Git adicionando ícones semânticos diretamente no VS Code. Deixe seu histórico de commits mais claro e profissional!",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "engines": {
     "vscode": "^1.96.0"
   },
